@@ -55,6 +55,8 @@ run: all
 
 # Regla para limpiar los archivos de construcción
 clean:
-	@echo "Limpiando el directorio de construccion..."
-	rm -rf $(BUILDDIR)
+	@echo "Limpiando el directorio de construcción..."
+	-DEL /S /Q "$(BUILDDIR)\*.*" > NUL 2>&1
+	-RMDIR /S /Q "$(BUILDDIR)" > NUL 2>&1
 	@echo "Limpieza completada."
+	@rm '-p'

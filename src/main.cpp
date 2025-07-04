@@ -40,9 +40,9 @@ int main() {
 
         std::cout << "\nBuscando " << lineaQuery << "..." << std::endl;
         start_time = std::chrono::high_resolution_clock::now();
-        LinkedList<int>* results = searchEngine.performQuery(lineaQuery);
+        LinkedList<int>* results = searchEngine.query(lineaQuery);
         end_time = std::chrono::high_resolution_clock::now();
-        duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+        duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
 
         if (results && results->getSize() > 0) {
             std::cout << "Documentos encontrados: (" << results->getSize() << "): [";

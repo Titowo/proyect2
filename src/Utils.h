@@ -3,10 +3,11 @@
 
 #include <string>
 #include <algorithm>
+#include <cctype>
 
 namespace Utils {
     std::string toLower(const std::string& str);
-    std::string cleanWord(const std::string& word);
+    std::string cleanWord(std::string word);
 };
 
 

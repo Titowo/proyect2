@@ -1,23 +1,30 @@
 #include "Utils.h"
+#include <locale>
+#include <iostream> 
 
 namespace Utils {
-    std::string toLower(std::string s) {
-        std::transform(s.begin(), s.end(), s.begin(), 
-                        [](unsigner char c) { return std::tolower(c); });
-        return s;
+
+
+    std::string toLower(const std::string& str) {
+        std::string lowerStr = str; // Crea una copia de la cadena para modificarla
+        std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(),
+                       [](unsigned char c){ return static_cast<unsigned char>(std::tolower(c)); });
+        return lowerStr;
     }
 
-    std::string cleanWord(std::string s) {
-        s = toLower(s);
+    std::string cleanWord(std::string word) {
 
-        std::string cleaned_s;
+        word = Utils::toLower(word);
 
-        for (char c : s) {
-            if (std::islanum(c)) {
-                cleaned_s += c;
+
+        std::string cleaned_word;
+        for (char c : word) {
+            if (std::isalnum(c)) {
+                cleaned_word += c;
             }
         }
 
-        return cleaned_s;
+        return cleaned_word;
     }
-}
+
+} 

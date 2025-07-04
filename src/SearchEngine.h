@@ -17,8 +17,8 @@ public:
     LinkedList<int>* query(const std::string& queryString) const;
 
 private:
-    InvertedIndex invertedIndex;
-    DocumentProcessor documentProcessor;
+    InvertedIndex* invertedIndex;
+    DocumentProcessor* documentProcessor;
 
     std::vector<std::string> procesarQueryString(const std::string& queryString) const;
 };

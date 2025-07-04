@@ -1,4 +1,6 @@
 #include "SearchEngine.h"
+#include "Utils.h"
+#include <iostream>
 
 SearchEngine::SearchEngine(InvertedIndex* index, DocumentProcessor* docProcessor)
     : invertedIndex(index), documentProcessor(docProcessor) {
