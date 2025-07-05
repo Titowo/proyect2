@@ -20,8 +20,7 @@ void InvertedIndex::addDocumento(const std::string& termino, int doc_id) {
         newEntry->listaPosteo->add(doc_id); // aniadir doc_id a la lista de posteo
         vocabulario[termino] = newEntry; // Insertar en el mapa
     } else {
-        // si ya existe el termino, aniadir doc_id a la lista de posteo existentes
-        // la funcion add de linkedlist se encarga de evitar duplicados
+
         it->second->listaPosteo->add(doc_id);
     }
 }

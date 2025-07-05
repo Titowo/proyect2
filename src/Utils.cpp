@@ -23,7 +23,6 @@ namespace Utils {
                 cleaned_word += c;
             }
         }
-
         return cleaned_word;
     }
 

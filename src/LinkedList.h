@@ -6,7 +6,7 @@
 template <typename T>
 class LinkedList {
 public:
-    LinkedList() : head(nullptr) {}
+    LinkedList() : head(nullptr), size(0) {}
     ~LinkedList();
 
     bool add(T value);

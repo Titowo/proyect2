@@ -1,12 +1,11 @@
 #include "DocumentProcessor.h"
 #include "InvertedIndex.h"
-#include "Utils.h" // Necesario para Utils::cleanWord y Utils::toLower
-#include <iostream> // Para std::cout y std::cerr
-#include <fstream>  // Para std::ifstream
-#include <sstream>  // Para std::istringstream
-#include <algorithm> // Para transform, si no está en Utils
+#include "Utils.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
 
-// Asegúrate de que InvertedIndex.h tiene addDocumento(std::string, int).
 
 DocumentProcessor::DocumentProcessor() {
     // Constructor
@@ -31,14 +30,12 @@ void DocumentProcessor::loadStopWords(const std::string& filename) {
     std::cout << "Cargadas " << stopWords.size() << " stopwords." << std::endl;
 }
 
-// *** CAMBIO EN LA DEFINICIÓN: Ahora devuelve el número de palabras añadidas ***
 int DocumentProcessor::processDocumentContent(const std::string& linea, int doc_id, InvertedIndex& index) {
-    // std::cout << "VERBOSE: Iniciando procesamiento de Doc ID: " << doc_id << std::endl; // Opcional
 
     size_t last_separator_pos = linea.rfind("||");
     if(last_separator_pos == std::string::npos || last_separator_pos + 2 >= linea.length()) {
         std::cerr << "Advertencia: Línea mal formada (Doc ID: " << doc_id << "): " << linea.substr(0, 50) << "..." << std::endl;
-        return 0; // No se añadieron palabras si la línea está mal
+        return 0;
     }
     std::string contenido = linea.substr(last_separator_pos + 2); // +2 para saltar "||"
 
@@ -60,7 +57,6 @@ int DocumentProcessor::processDocumentContent(const std::string& linea, int doc_
     return words_added_count_current_doc; // Devuelve el conteo de palabras añadidas
 }
 
-// Este método es para la función de consulta, no lo modificaremos significativamente para esta tarea.
 std::vector<std::string> DocumentProcessor::getCleanWords(const std::string& text) const {
     std::vector<std::string> cleanWords;
     std::istringstream iss(text);
@@ -92,16 +88,16 @@ void DocumentProcessor::loadAndProcessDocuments(const std::string& filename, Inv
     while (std::getline(file, linea)) {
         if (total_words_indexed >= WORD_LIMIT) {
             std::cout << "VERBOSE: Límite de " << WORD_LIMIT << " palabras alcanzado. Deteniendo la indexación inicial." << std::endl;
-            break; // Salir del bucle si se alcanza el límite
+            break;
         }
 
-        // Procesa la línea y obtiene el número de palabras añadidas
+
         total_words_indexed += processDocumentContent(linea, doc_id, index);
         
-        doc_id++; // Incrementa el ID para el siguiente documento
+        doc_id++;
         processed_docs_count++;
 
-        // Mensaje de progreso cada 100 documentos (puedes ajustar VERBOSE_DOC_STEP)
+
         const int VERBOSE_DOC_STEP = 100;
         if (processed_docs_count % VERBOSE_DOC_STEP == 0) {
             std::cout << "VERBOSE: " << processed_docs_count << " documentos procesados. Palabras indexadas: " << total_words_indexed << std::endl;
